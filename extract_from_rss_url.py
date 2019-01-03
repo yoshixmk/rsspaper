@@ -24,8 +24,13 @@ for rss_url in rss_urls:
 
     for url in urls:
         article = Article(url)
-        article.download()
-        article.parse()
+        try:
+            article.download()
+            article.parse()
+        except:
+            import traceback
+            traceback.print_exc()
+            continue
         print(article.title)
 
         fe = fg.add_entry()
