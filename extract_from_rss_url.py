@@ -39,5 +39,5 @@ for rss_url in rss_urls:
         fe.link(href=url)
         fe.description(article.text)
 
-output_file = "atom.xml"
+output_file = "public/atom.xml"
 fg.atom_file(output_file)
