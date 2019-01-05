@@ -15,6 +15,8 @@ fg.title('extract_from_rss_url')
 fg.author({'name': 'yoshixmk'})
 fg.language('ja')
 
+
+strings_for_html = ["<!DOCTYPE html><html lang='ja'><meta http-equiv='content-type' charset='utf-8'><body style='display: table'>"]
 for rss_url in rss_urls:
     feeds = feedparser.parse(rss_url)
 
@@ -38,6 +40,12 @@ for rss_url in rss_urls:
         fe.title(article.title)
         fe.link(href=url)
         fe.description(article.text)
+        strings_for_html.append("<b style='color:#00cc7e'>" + article.title + "</b><br>")
+        strings_for_html.append(article.text + "<br>")
 
 output_file = "public/atom.xml"
 fg.atom_file(output_file)
+
+strings_for_html.append("</body></html>")
+with open("public/simple.html", "w", encoding="utf-8") as f:
+    f.writelines(strings_for_html)
